@@ -5,23 +5,33 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { TodoInput } from './src/components';
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+  const handleAddTodo = (todo: string) => {
+    console.log(todo);
+  }
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Todo App</Text>
+      <TodoInput onAddTodo={handleAddTodo} />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'black',
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 20,
   },
 });
 
