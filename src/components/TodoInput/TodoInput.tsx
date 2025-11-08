@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Input } from '../Input';
+import { colors, spacing, borderRadius, fontSize } from '../../theme';
 
 interface TodoInputProps {
   onAddTodo: (todo: string) => void;
@@ -22,12 +18,7 @@ const TodoInput = ({ onAddTodo }: TodoInputProps) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        value={todo}
-        onChangeText={setTodo}
-        style={styles.input}
-        placeholder="Add a new todo"
-      />
+      <Input value={todo} onChangeText={setTodo} placeholder="Add a new todo" />
       <TouchableOpacity onPress={handleAddTodo} style={styles.button}>
         <Text style={styles.buttonText}>Add</Text>
       </TouchableOpacity>
@@ -41,26 +32,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 10,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 5,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    fontSize: 16,
+    gap: spacing.sm,
   },
   button: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 5,
-    backgroundColor: 'black',
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.primary,
   },
   buttonText: {
-    color: 'white',
-    fontSize: 16,
+    color: colors.text.white,
+    fontSize: fontSize.md,
     fontWeight: 'bold',
   },
 });
