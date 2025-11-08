@@ -1,37 +1,68 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { TodoInput, TodoList } from './src/components';
+import { Todo } from './src/type';
+import { colors, fontSize, spacing } from './src/theme';
 
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import { TodoInput } from './src/components';
+const App = () => {
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-function App() {
   const handleAddTodo = (todo: string) => {
-    console.log(todo);
-  }
+    setTodos(prevTodos => [
+      ...prevTodos,
+      { id: Date.now(), text: todo, completed: false },
+    ]);
+  };
+
+  const handleCompleteTodo = (id: number) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
+
+  const handleEditTodo = (id: number, text: string) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo => (todo.id === id ? { ...todo, text: text } : todo)),
+    );
+  };
+
+  const handleDeleteTodo = (id: number) => {
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Todo App</Text>
-      <TodoInput onAddTodo={handleAddTodo} />
-    </SafeAreaView>
+      <View style={styles.inputContainer}>
+        <TodoInput onAddTodo={handleAddTodo} />
+      </View>
+      <TodoList
+        todos={todos}
+        onCompleteTodo={handleCompleteTodo}
+        onDeleteTodo={handleDeleteTodo}
+        onEditTodo={handleEditTodo}
+      />
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: spacing.xl,
   },
   title: {
-    fontSize: 24,
+    fontSize: fontSize.xxl,
     fontWeight: 'bold',
-    color: 'black',
+    color: colors.text.primary,
     textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: spacing.xl,
+    marginBottom: spacing.lg,
+  },
+  inputContainer: {
+    marginBottom: spacing.lg,
   },
 });
 
