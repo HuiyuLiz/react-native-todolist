@@ -1,3 +1,5 @@
+<img src="https://github.com/HuiyuLiz/react-native-project/blob/main/src/gif/todolistdemo.gif" width="250" />
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
