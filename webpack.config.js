@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const repoName = 'react-native-todolist'; // ✅ 你的 GitHub 專案名稱
+const isProd = process.env.NODE_ENV === 'production';
+const repoName = 'react-native-todolist';
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
@@ -10,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
     clean: true,
-    publicPath: `/${repoName}/`, // ✅ GitHub Pages 正確路徑設定
+    publicPath: isProd ? `/${repoName}/` : '/', // 只有 production 才加 repoName
   },
   module: {
     rules: [
