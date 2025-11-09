@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TodoInput, TodoList } from './src/components';
 import { Todo } from './src/type';
-import { colors, fontSize, spacing } from './src/theme';
+import { colors, spacing } from './src/theme';
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     padding: spacing.xl,
   },
   title: {
-    fontSize: fontSize.xxl,
+    fontSize: 24,
     fontWeight: 'bold',
     color: colors.text.primary,
     textAlign: 'center',
