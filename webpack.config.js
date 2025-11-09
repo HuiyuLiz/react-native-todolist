@@ -1,13 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const repoName = 'react-native-todolist'; // ✅ 你的 GitHub 專案名稱
+
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV || 'development',
   entry: './index.web.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.[contenthash].js',
     clean: true,
+    publicPath: `/${repoName}/`, // ✅ GitHub Pages 正確路徑設定
   },
   module: {
     rules: [
@@ -25,6 +28,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
@@ -35,7 +42,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'react-native': 'react-native-web',
+      'react-native$': 'react-native-web',
       'react-native-vector-icons/MaterialIcons': path.resolve(
         __dirname,
         'src/components/Icon/Icon.web.tsx',
