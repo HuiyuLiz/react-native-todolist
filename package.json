@@ -14,7 +14,8 @@
     "prepare": "husky",
     "web": "webpack serve --mode development",
     "build:web": "cross-env NODE_ENV=production webpack --mode production",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "preview": "npx webpack --mode production&npx serve dist"
   },
   "dependencies": {
     "@react-native-vector-icons/evil-icons": "^12.4.0",
