@@ -1,11 +1,20 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { TodoInput, TodoList } from './src/components';
 import { Todo } from './src/type';
 import { colors, spacing } from './src/theme';
 
 const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    // 如果是網頁平台，設置 body 的最大寬度為 480px
+    if (Platform.OS === 'web') {
+      const body = (document as any).body;
+      body.style.maxWidth = '480px';
+      body.style.margin = '0 auto';
+    }
+  }, []);
 
   const handleAddTodo = (todo: string) => {
     setTodos(prevTodos => [
